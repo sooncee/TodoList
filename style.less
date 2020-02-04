@@ -1,0 +1,111 @@
+*{
+    list-style: none;
+    border:0;
+    padding:0;
+    margin:0;
+}
+
+
+header{
+    height:80px;
+    position: relative;
+    .hamburger-menu{
+        position:absolute;
+        width:24px;
+        left:30px;
+        top:50%;
+        
+
+        li{
+            border-bottom:3px solid #333;
+            margin-bottom:4px;
+        }
+    }
+}
+
+#task-wrap{
+    
+    padding:0 30px;
+    
+    .task-list-header{
+    
+        .task-day{
+            display: flex;
+    
+            li{
+                width:25%;
+                width: 36px;
+                margin: 0 20px;
+                text-align: center;
+                font-size:12px;
+                line-height: 24px;
+                &:first-child{
+                    margin-left:0;
+                }
+            }
+        }
+    }
+
+    .task-list-box{
+        margin-top:20px;
+        h2{
+            font-size:20px;
+            font-weight:600;
+            margin-bottom: 30px;
+        }
+        .task-list{
+            li{
+                margin:5px 0;
+                background:rgb(238,238,238);
+                padding:12px 10px;
+                padding-left:38px;
+                font-size:14px;
+                position: relative;
+                
+                &.blue{
+                    &:after{
+                        content:"";
+                        position: absolute;
+                        top:50%;
+                        transform: translateY(-50%);
+                        left:14px;
+                        width:12px;
+                        height:12px;
+                        border-radius:6px;
+                        background:rgb(5,112,232);
+                    }
+                }
+
+                &.green{
+                    &:after{
+                        content:"";
+                        position: absolute;
+                        top:50%;
+                        transform: translateY(-50%);
+                        left:14px;
+                        width:12px;
+                        height:12px;
+                        border-radius:6px;
+                        background:rgb(224,225,27);
+                    }
+                }
+
+                &.red{
+                    &:after{
+                        content:"";
+                        position: absolute;
+                        top:50%;
+                        transform: translateY(-50%);
+                        left:14px;
+                        width:12px;
+                        height:12px;
+                        border-radius:6px;
+                        background:rgb(255,45,67);
+                    }
+                }
+
+              
+            }
+        }
+    }
+}
