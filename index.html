@@ -2,58 +2,265 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>TodoList</title>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" 
+        href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+        crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     </head>
     <body>
         <header>
+            <h2 class="task-title">My Tasks</h2>
             <ul class="hamburger-menu">
                 <li></li>
                 <li></li>
                 <li></li>
             </ul>
+            
         </header>
 
-        <div id="task-wrap">
+        <div id="task-wrap" class="show">
             <div class="task-list-header">
                 <ul class="task-day">
                     <li>
-                        Week</br>
-                        1
+                        Jan</br>
+                        <span class="active">1</span>
                     </li>
                     <li>
-                        Week</br>
-                        2
+                        Feb</br>
+                        <span>2</span>
                     </li>
                     <li>
-                        Week</br>
-                        3
+                        Mar</br>
+                        <span>3</span>
                     </li>
                     <li>
-                        Week</br>
-                        4
+                        Apr</br>
+                        <span>4</span>
                     </li>
                     <li>
-                        Week</br>
-                        5
+                        May</br>
+                        <span>5</span>
+                    </li>
+                    <li>
+                        Jun</br>
+                        <span>6</span>
+                    </li>
+                    <li>
+                        Jul</br>
+                        <span>7</span>
+                    </li>
+                    <li>
+                        Aug</br>
+                        <span>8</span>
+                    </li>
+                    <li>
+                        Sep</br>
+                        <span>9</span>
+                    </li>
+                    <li>
+                        Oct</br>
+                        <span>10</span>
+                    </li>
+                    <li>
+                        Nov</br>
+                        <span>11</span>
+                    </li>
+                    <li>
+                        Dec</br>
+                        <span>12</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="task-list-box">
+                <ul class="task-list list-1">
+                    <li class="blue check">
+                        Maake Logo for Task App
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="yellow check">
+                        Learn about UX/UI
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="red">
+                        Call for Alex S.
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="blue">
+                        Maake Logo for Task App
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="yellow">
+                        Learn about UX/UI
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="red">
+                        Call for Alex S.
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li> <li class="blue">
+                        Maake Logo for Task App
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="yellow">
+                        Learn about UX/UI
+                        <span class="task-check"><i class="fas fa-check"></span></i>
                     </li>
                 </ul>
             </div>
             <div class="task-list-box">
-                <h2>My Tasks</h2>
-                <ul class="task-list">
-                    <li class="blue">Maake Logo for Task App
-                        <i class="fas fa-check"></i>
-                    </li>
-                    <li class="green">Learn about UX/UI</li>
-                    <li class="red">Call for Alex S.</li>
-                    <li class="blue">Make Logo for Task App</li>
-                    <li class="green">Learn about UX/UI</li>
-                    <li class="red">Call for Alex D.</li>
-                    <li class="blue">Make Logo for Task App</li>
+                <ul class="task-list list-2">
                 </ul>
             </div>
+            <ul class="task-list-tab">
+                <li class="tab-list active">lists<br/><span class="count"></span></li>
+                <li class="tab-progress">Progress<br/><span class="count"></span></li>
+                <li class="tab-done">done<br/><span class="count"></span></li>
+            </ul>
         </div>
-        <footer></footer>
+        
+        <div class="addbox">
+            <div class="addbox-input">
+                <h2>Add List</h2>
+                <div class="color-box">
+                    <span class="blue"></span>
+                    <span class="red"></span>
+                    <span class="yellow"></span>
+                </div>
+                <input type="text" class="add-input" maxlength="50">
+                <button class="add-btn">Add</button>
+            </div>
+        </div>
+
+        <footer>
+            <ul>
+                <li class="footer-home">
+                    <span class="footer-icon"><i class="fas fa-home"></i></span>
+                    Home
+                </li>
+                <li class="footer-task active">
+                    <span class="footer-icon"><i class="fas fa-check-circle"></i></span>
+                    Tasks
+                </li>
+                <li class="footer-add">
+                    <span class="footer-icon"><i class="fas fa-plus-circle"></i></span>
+                    Add
+                </li>
+                <li class="footer-setting">
+                    <span class="footer-icon"><i class="fas fa-cog"></i></span>
+                    Setting
+                </li>
+            </ul>
+
+        </footer>
+
+
+        
+        <script>
+            // 현재 날짜 구하기
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            var day = date.getDay();
+            console.log(year,month,day);
+
+            // Tasklist 목록 개수 구하기
+            function list_count(){
+                // 전체
+                var lists = $('.task-list li').length;
+                $('.task-list-tab .tab-list span').append(lists);
+                // 진행중
+                var progress = $('.task-list li').not('.task-list li.check').length;
+                $('.task-list-tab .tab-progress span').append(progress);
+                // 완료
+                var done = $('.task-list li.check').length;
+                $('.task-list-tab .tab-done span').append(done);
+            }
+            
+            list_count();
+            
+            // Task 탭 클릭 이벤트
+            $('.task-list li').addClass('show');
+            $('.task-list-tab li').on("click",function(){
+                $('.task-list li').removeClass('show');
+                $('.task-list-tab li').removeClass('active');
+                // 모든 리스트
+                if($(this).hasClass('tab-list')){    
+                    $('.task-list li').addClass('show');
+                    console.log("모든리스트");
+                    $(this).addClass('active');
+                }
+                // 체크 리스트
+                else if($(this).hasClass('tab-done')){
+                    $('.task-list li.check').addClass('show');
+                    console.log("체크리스트");
+                    $(this).addClass('active');
+                }
+                // 그 외 리스트
+                else if($(this).hasClass('tab-progress')){
+                    console.log("진행중리스트");
+                    $('.task-list li').not('.task-list li.check').addClass('show');
+                    $(this).addClass('active');
+                }
+            });
+
+            // footer 탭 클릭 이벤트
+            $('footer ul li').on("click",function(){
+                // Task 탭 클릭
+                if($(this).hasClass('footer-task')){
+                    $('#task-wrap').addClass('show');
+                } 
+                // Home 탭 클릭 
+                
+
+                // Add popup 실행
+                else if($(this).hasClass('footer-add')){
+                    $('.addbox').addClass('show');
+                    console.log("Gg")
+                } 
+            });
+            
+            // Addpopup
+            
+            // 중요도 선택
+
+
+            // Add 버튼실행
+            $('.addbox .add-btn').on("click",function(){
+                var Add_input = $('.add-input').val();
+                console.log(Add_input)
+                
+                //내용이 없을 경우
+                if(Add_input == ""){
+                    alert("내용을 입력하세요");
+                }
+                else{
+                    $('.task-list').append(
+                    '<' + 'li class='+'"' + 'show' +'"'+'>'+
+                    '<p>'+Add_input+'</p>'+
+                    '<span class='+'"'+'task-check'+'"'+'><i class='+'"'+'fas fa-check'+'"'+'></i></span>'+
+                    '</li>')
+                    // 종료
+                    $('.addbox').removeClass('show');
+                }   
+            });
+            
+
+
+            // 달력 이벤트
+            $('.task-day li').on("click",function(){
+                var day_nb = $(this).index() + 1;
+                var month_scroll = 60 * day_nb - 220;
+                console.log(month_scroll);
+                $('.task-day').animate({scrollLeft : month_scroll},300);
+                $('.task-day li span').removeClass('active');
+                $(this).children('span').addClass('active');
+            });
+
+            
+
+
+            </script>
     </body>
 </html>
