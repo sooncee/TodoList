@@ -270,9 +270,11 @@
             // 완료 취소 이벤트(동적으로 생성된 태그에 이벤트)
             $(document).on("click",".task-list li",function(){
                 $(this).toggleClass('check');
+                // 체크 되있는 경우 체크 취소
                 if($(this).hasClass('check')){
                     $(this).appendTo($(this).parent());
                 }
+                // 체크 안된 경우 체크
                 else{
                     $(this).prependTo($(this).parent());
                 }
@@ -292,14 +294,15 @@
                 // Task 탭 클릭
                 if($(this).hasClass('footer-task')){
                     $('#task-wrap').addClass('show');
-                    $(this).toggleClass('active');
-                    $('.footer-delete').toggleClass('active');
+                    $('.footer-delete').removeClass('active');
+                    $(this).addClass('active');
+                    
                 } 
                 // Home 탭 클릭 
                 
                 // delete 탭 클릭
                 else if($(this).hasClass('footer-delete')){
-                    $('.task-list-box').addClass("delete");
+                    $('.task-list-box').toggleClass("delete");
                     $(this).toggleClass('active');
                     $('.footer-task').toggleClass('active');
                 }
