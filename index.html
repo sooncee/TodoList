@@ -2,6 +2,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>TodoList</title>
+        <meta charset="utf-8">
         <link rel="stylesheet" 
         href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
@@ -75,7 +76,22 @@
             </div>
             
             <div class="task-list-box">
-                <ul class="task-list list-1">
+                <ul class="task-list mon-1">
+                    <li class="blue check">
+                        1Maake Logo for Task App
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="yellow check">
+                        1Learn about UX/UI
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="red">
+                        1Call for Alex S.
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                </ul>
+
+                <ul class="task-list mon-2">
                     <li class="blue check">
                         Maake Logo for Task App
                         <span class="task-check"><i class="fas fa-check"></span></i>
@@ -108,9 +124,24 @@
                         <span class="task-check"><i class="fas fa-check"></span></i>
                     </li>
                 </ul>
-            </div>
-            <div class="task-list-box">
-                <ul class="task-list list-2">
+
+                <ul class="task-list mon-3">
+                    <li class="blue check">
+                        3Maake Logo for Task App
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="yellow check">
+                        3Learn about UX/UI
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="red">
+                        3Call for Alex S.
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
+                    <li class="red">
+                        3Call for Alex S.
+                        <span class="task-check"><i class="fas fa-check"></span></i>
+                    </li>
                 </ul>
             </div>
             <ul class="task-list-tab">
@@ -118,18 +149,37 @@
                 <li class="tab-progress">Progress<br/><span class="count"></span></li>
                 <li class="tab-done">done<br/><span class="count"></span></li>
             </ul>
+            
         </div>
         
         <div class="addbox">
             <div class="addbox-input">
                 <h2>Add List</h2>
-                <div class="color-box">
-                    <span class="blue"></span>
-                    <span class="red"></span>
-                    <span class="yellow"></span>
+                <div class="add-contents">
+                    <h4>Importance</h4>
+                    <div class="color-box">
+                        
+                        <span class="blue check"></span>
+                        <span class="red"></span>
+                        <span class="yellow"></span>
+                    </div>
                 </div>
-                <input type="text" class="add-input" maxlength="50">
+                <!-- <div class="add-contents">
+                    <div>
+                        <h4>Start Date</h4>
+                        <div>2020-01-01</div>
+                    </div>
+                </div> -->
+                <div class="add-contents">
+                    <h4>Task Title</h4>
+                    <input type="text" class="add-input" placeholder="제목을 입력하세요" maxlength="50">
+                </div>
+                <div class="add-contents">
+                    <h4>Contents</h4>
+                    <input type="text" class="add-input" placeholder="내용을 입력하세요" maxlength="50">
+                </div>
                 <button class="add-btn">Add</button>
+                <span class="addbox-end"><i class="fas fa-times"></i></span>
             </div>
         </div>
 
@@ -147,9 +197,9 @@
                     <span class="footer-icon"><i class="fas fa-plus-circle"></i></span>
                     Add
                 </li>
-                <li class="footer-setting">
-                    <span class="footer-icon"><i class="fas fa-cog"></i></span>
-                    Setting
+                <li class="footer-delete">
+                    <span class="footer-icon"><i class="fas fa-trash-alt"></i></span>
+                    Delete
                 </li>
             </ul>
 
@@ -161,24 +211,25 @@
             // 현재 날짜 구하기
             var date = new Date();
             var year = date.getFullYear();
-            var month = date.getMonth();
-            var day = date.getDay();
+            var month = date.getMonth()+1;
+            var day = date.getDate();
             console.log(year,month,day);
 
+           
             // Tasklist 목록 개수 구하기
-            function list_count(){
+            function list_count(mon){
                 // 전체
-                var lists = $('.task-list li').length;
-                $('.task-list-tab .tab-list span').append(lists);
+                var lists = $('.mon-'+mon+' li').length;
+                $('.task-list-tab .tab-list span').html(lists);
                 // 진행중
-                var progress = $('.task-list li').not('.task-list li.check').length;
-                $('.task-list-tab .tab-progress span').append(progress);
+                var progress = $('.mon-'+mon+' li').not('.task-list li.check').length;
+                $('.task-list-tab .tab-progress span').html(progress);
                 // 완료
-                var done = $('.task-list li.check').length;
-                $('.task-list-tab .tab-done span').append(done);
+                var done = $('.mon-'+mon+' li.check').length;
+                $('.task-list-tab .tab-done span').html(done);
             }
             
-            list_count();
+            list_count(month);
             
             // Task 탭 클릭 이벤트
             $('.task-list li').addClass('show');
@@ -205,14 +256,53 @@
                 }
             });
 
+            // 완료 취소 이벤트
+            // $('.task-list li').on("click",function(){
+            //     $(this).toggleClass('check');
+            //     if($(this).hasClass('check')){
+            //         $(this).appendTo($(this).parent());
+            //     }
+            //     else{
+            //         $(this).prependTo($(this).parent());
+            //     }
+            // });
+
+            // 완료 취소 이벤트(동적으로 생성된 태그에 이벤트)
+            $(document).on("click",".task-list li",function(){
+                $(this).toggleClass('check');
+                if($(this).hasClass('check')){
+                    $(this).appendTo($(this).parent());
+                }
+                else{
+                    $(this).prependTo($(this).parent());
+                }
+                list_count(day_nb);
+            });
+
+            // delete 이벤트
+            $(document).on("click",'.delete .task-list li',function(){
+                $(this).remove();
+                list_count(day_nb);
+            });
+
+
+
             // footer 탭 클릭 이벤트
             $('footer ul li').on("click",function(){
                 // Task 탭 클릭
                 if($(this).hasClass('footer-task')){
                     $('#task-wrap').addClass('show');
+                    $(this).toggleClass('active');
+                    $('.footer-delete').toggleClass('active');
                 } 
                 // Home 탭 클릭 
                 
+                // delete 탭 클릭
+                else if($(this).hasClass('footer-delete')){
+                    $('.task-list-box').addClass("delete");
+                    $(this).toggleClass('active');
+                    $('.footer-task').toggleClass('active');
+                }
 
                 // Add popup 실행
                 else if($(this).hasClass('footer-add')){
@@ -224,7 +314,27 @@
             // Addpopup
             
             // 중요도 선택
+            let circle_select ="blue"
+            $(".color-box span").on("click",function(){
+                $('.color-box span').removeClass('check')
+                $(this).addClass('check');
+                // 파랑선택
+                if($(this).hasClass('blue')){
+                    circle_select = "blue"; 
+                }
 
+                // 빨강
+                else if($(this).hasClass('red')){
+                    circle_select = "red";
+                }
+
+                //노랑
+                else{
+                    circle_select = "yellow";
+                }
+                
+                console.log(circle_select);
+            });
 
             // Add 버튼실행
             $('.addbox .add-btn').on("click",function(){
@@ -235,32 +345,62 @@
                 if(Add_input == ""){
                     alert("내용을 입력하세요");
                 }
+                // else if(circle_select == ""){
+                //     alert("중요도를 선택하세요");
+                // }
+
+                // 추가 이벤트
+                
                 else{
-                    $('.task-list').append(
-                    '<' + 'li class='+'"' + 'show' +'"'+'>'+
+                    // 현재 있는 월 번호
+                    var select_month = $('.task-day li.active').index()+1;
+                    // 내용추가
+                    $('.task-list.mon-' + select_month ).prepend(
+                    '<' + 'li class=' + '"'+circle_select+' show mon-'+ month +'"'+'>'+
                     '<p>'+Add_input+'</p>'+
                     '<span class='+'"'+'task-check'+'"'+'><i class='+'"'+'fas fa-check'+'"'+'></i></span>'+
                     '</li>')
                     // 종료
-                    $('.addbox').removeClass('show');
-                }   
+                    end_null();
+                    list_count(day_nb);
+                }
             });
-            
 
+            // 종료 및 초기화
+            function end_null(){
+                console.log("종료");
+                $('.addbox').removeClass('show');
+                $('.color-box span').removeClass('check')
+                $('.color-box span.blue').addClass('check')
+                $('.add-input').val('');
+            }
 
-            // 달력 이벤트
+            // 종료 버튼
+            $('.addbox .addbox-end').on("click",function(){
+                end_null();
+            })
+
+            let day_nb = $('.task-day .active').index() + 1;
+            // 헤더 달력 액티브 이벤트
             $('.task-day li').on("click",function(){
-                var day_nb = $(this).index() + 1;
-                var month_scroll = 60 * day_nb - 220;
+                day_nb = $(this).index() + 1;
+                var month_scroll = 60 * day_nb - 210;
                 console.log(month_scroll);
                 $('.task-day').animate({scrollLeft : month_scroll},300);
-                $('.task-day li span').removeClass('active');
-                $(this).children('span').addClass('active');
+                $('.task-day li').removeClass('active');
+                $(this).addClass('active');
+                $('#task-wrap .task-list-box .task-list').removeClass('show');
+                $('#task-wrap .task-list-box .task-list.mon-'+day_nb).addClass('show');
+                list_count(day_nb);
             });
 
+            // 월별 액티브
+            $('.task-day li').eq(month-1).addClass('active');
+            //  $('#task-wrap .task-list-box .task-list li').removeClass('show');
+            $('#task-wrap .task-list-box .task-list.mon-'+month).addClass('show');
+
+        
             
-
-
             </script>
     </body>
 </html>

@@ -56,7 +56,7 @@ header{
             &::-webkit-scrollbar {
                 display: none; /* Chrome, Safari, Opera*/
             }
-    
+            
             li{
                 width: 20px;
                 margin: 0 20px;
@@ -75,9 +75,11 @@ header{
                     justify-content: center;
                     margin:auto
                 }
-                .active{
-                    background: #ff0000;
-                    color:#fff;
+                &.active{
+                    span{
+                        background: #ff0000;
+                        color:#fff;
+                    }
                 }
             }
         }
@@ -89,20 +91,52 @@ header{
         height: calc(100% - 130px);
         overflow-y: hidden;
 
+
+
+
         h2{
             font-size:20px;
             font-weight:600;
             margin-bottom: 30px;
         }
 
+        &.delete{
+            .task-list{
+                .delete-over{
+                    position: absolute;
+                    top:0;
+                    left:0;
+                    z-index: 10;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.7);
+                }
+            }
+        }
+
         .task-list{
             height:100%;
             overflow-y: scroll;
+            display: none;
+            clip-path: inset(0 0 100% 0);
+            animation: clip 1s forwards linear;
+
+            @keyframes clip {
+                to{
+                    clip-path: inset(0 0 0 0);
+                }
+            }
+            
+            
+
+            &.show{
+                display: block;
+            }
             li{
                 margin:5px 0;
                 background:rgb(238,238,238);
                 padding:12px 38px;
-                
+                transition: all 0.3s;
                 font-size:14px;
                 position: relative;
                 display: none;
@@ -116,7 +150,6 @@ header{
                     right:14px;
                     display:none;
                     i{
-                        
                         color:@green
                     }
                 }
@@ -163,6 +196,8 @@ header{
                 }
 
             &.check{
+                opacity:0.3;
+                text-decoration: line-through;
                 .task-check{
                     display: block;
                 }
@@ -171,7 +206,10 @@ header{
                 display:block;
             }
         }  
-        }
+        
+    }
+
+        
            
         
     }
@@ -256,6 +294,7 @@ footer{
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.7);
+    
     z-index:100;
     display: flex;
     justify-content: center;
@@ -265,33 +304,45 @@ footer{
         display: flex;
     }
     .addbox-input{
-        width: calc(100% - 60px);
+        width: 100%;
+        height:100%;
         position: relative;
-        height: 300px;
         background: #fff;
         border-radius: 20px;
         padding: 0 30px;
+        
         display: flex;
-        justify-content: center;
         box-sizing: border-box;
         flex-direction: column;
-        
-        h2{
-           text-align: center;
+        .add-contents{
+            margin:10px 0;
         }
-    
+        h2{
+            padding-top:50px;
+            padding-bottom: 20px;
+        }
+        
+        h4{
+            display: block;
+            font-size:14px;
+        }
         .color-box{
             display: flex;
-            justify-content: center;
-            margin:20px 0;
+            
+            margin:10px 0;
             span{
-                width: 12px;
-                height: 12px;
-                border-radius: 6px;
-                margin:0 15px;
+                width: 20px;
+                height: 20px;
+                border-radius: 10px;
+                margin:0 5px;
+                box-sizing: border-box;
+                &.check{
+                    border: 2px solid #000;
+                }
             }
             .blue{
                 background: @blue;
+                margin-left: 0;
             }
             .red{
                 background: @red;
@@ -303,8 +354,11 @@ footer{
 
         input{
             min-height:40px;
-            border:1px solid #ccc;
-            padding:0 10px;
+            border:0;
+            width: 100%;
+            border-bottom:1px solid #666;
+            padding:0px;
+            color:#999;
          
         }
         button{
@@ -314,9 +368,17 @@ footer{
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius:20px;
             background:@red;
             color:#fff;
+        }
+        .addbox-end{
+            top:0px;
+            right:0px;
+            position: absolute;
+            padding:20px 30px ;
+            i{
+                font-size:22px;
+            }
         }
     }
 }
